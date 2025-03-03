@@ -1,0 +1,14 @@
+name: scriptingtemplate_rpt
+title: scriptingTemplate_rpt
+username: lowell.gould@spgenetics.com
+account: lowell.gould@spgenetics.com
+server: connect.spgenetics.com
+hostUrl: https://connect.spgenetics.com/__api__
+appId: 141
+bundleId: 205
+url: https://connect.spgenetics.com/scriptingTemplate_rpt/
+version: 1
+quarto_version: 1.6.39
+quarto_engines: knitr
+asMultiple: FALSE
+asStatic: FALSE

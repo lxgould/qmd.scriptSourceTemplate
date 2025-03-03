@@ -1,0 +1,13 @@
+name: scriptingtemplate_app
+title: scriptingTemplate_app
+username: lowell.gould@spgenetics.com
+account: lowell.gould@spgenetics.com
+server: connect.spgenetics.com
+hostUrl: https://connect.spgenetics.com/__api__
+appId: 139
+bundleId: 202
+url: https://connect.spgenetics.com/scriptingTemplate_app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/test_app_1.txt|getData/make_data_file.html|getData/make_data_file.ipynb|getData/make_data_file.qmd|getData/make_data_file.R|getData/run_something.R

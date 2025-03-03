@@ -9,13 +9,18 @@
 
 library(shiny)
 
-date_file <- "data/test_app_1.txt"
+date_file <- "/srv/shiny-server/shiny-data/scriptingTemplate/test_app_1.txt"
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   fluidRow( 
     column(10, offset = 1,
-           h2("Test App 1") 
+           h2("shiny.scriptingTemplate"),
+           p("This app is used to test the following file:"),
+           tags$code(date_file),
+           p("The file is supposed to be generated with the make_data_file.R script.
+             And it contains a single line: the date that the file was generated
+             or updated")
     )
   ),
   fluidRow( 
@@ -30,6 +35,13 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   output$table_header <- renderUI({
+    if ( !file.exists(date_file) ) {
+      response <- h3(paste0("I can't find your file: ", date_file),
+                     style = "color:red"
+      )
+      return(response)
+    }
+    
     dt <- readLines(date_file)[1]
     tagList(
     h3(paste0("Current Date Time: ", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))),

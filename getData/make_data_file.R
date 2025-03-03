@@ -1,14 +1,17 @@
 #- generate a file with the current date
 
+library(lubridate)
 
-date_file <- "../data/test_app_1.txt"
+date_file <- "/srv/shiny-server/shiny-data/scriptingTemplate/test_app_1.txt"
 
 dt <- format(Sys.time(), "%Y-%m-%d %H:%M:%S")
 
 cat(paste0("Writing the date to ", date_file))
 
-#- force an error
-# stop("I forced an error.  The date was not written to the file")
+#- at random times, conditionally force an error
+if ( runif(n = 1) > .8 )
+  stop("I forced an error.  The date was not written to the file")
+
 writeLines(dt, date_file)
 
 n = 10000

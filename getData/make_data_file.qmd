@@ -10,8 +10,8 @@ engine: knitr
 
 ```{r setup}
 #| echo: FALSE
-app_name = "shiny.superCoolShinyApp"
-report_link <- "https://connect.spgenetics.com/report"
+app_name = "shiny.scriptingTemplate"
+report_link <- "https://connect.spgenetics.com/scriptingTemplate_rpt"
 
 #- List the scripts here that need to be run. "script_name = "status".
 #- status default to "failure" and changes depending on the outcome
