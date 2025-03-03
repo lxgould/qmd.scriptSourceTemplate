@@ -45,6 +45,7 @@ scripts.  The order of execution is:
 ## To Do
 
 1. An error in *make_data_file.R* causes the entire Quarto rendering to abort.  Ideally, the error in *make_data_file.R* should be reported and execution should continue on to *run_something.R*
+    - It works as expected when executed from my local R-Studio.
 2. Scripts are executed in a loop.  The goal is to have a section header followed by script output.  However, the only section header I've managed to implement is simple text as opposed to h2 or h3 text.  The "asis" chunk option halts rendering with an error and raw html can not be escaped with `knitr::raw_html()` inside a loop.
 3. Email is generated using {sendmailR} within the qmd file.  Is this sufficient?
 
