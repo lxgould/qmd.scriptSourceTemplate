@@ -1,0 +1,150 @@
+---
+title: "Automated Script Execution Report"
+format:
+  html:
+    toc: true
+    toc_depth: 4
+    toc-location: left
+engine: knitr
+---
+
+```{r setup}
+#| echo: FALSE
+app_name = "shiny.superCoolShinyApp"
+report_link <- "https://connect.spgenetics.com/report"
+
+#- List the scripts here that need to be run. "script_name = "status".
+#- status default to "failure" and changes depending on the outcome
+#- of the script execution.
+script_list <-list("make_data_file.R" = "failure", 
+                   "run_something.R" = "failure")
+#- for keeping track of scripts and errors
+script_index = 1
+success_count = 0
+error_count = 0
+error_scripts = c()
+
+#- mail parameters
+smtp_host = "shpsmtp.murphybrownllc.com"
+mail_to = "lgould@smithfield.com"
+mail_from = "shiny@spgenetics.com"
+mail_subj = paste0("Error: ", app_name, " Automated Script Report")
+
+#- Set up a hook so R errors are highlighted
+knitr::knit_hooks$set(error = function(x, options) { 
+  paste(c('\n\n:::{style="color:Crimson; background-color: SeaShell;"}',
+          gsub('^## Error', '**ERROR**', x),
+          ':::'), collapse = '\n')
+})
+
+```
+
+---
+subtitle: "`r app_name`"
+---
+
+## Header
+
+This report shows the results of running scripts for the `r app_name` app. The header section describes the report
+
+## Environment Parameters
+
+In this section we want to show parameter information from the operating system
+
+
+```{bash}
+#| label: shell_info
+#| echo: FALSE
+
+ME=`basename $0 .sh`
+CL="`basename $0` ${@}"
+CWD=`pwd`
+ME_START=`date +"%Y%m%d_%T"`
+
+printf "\n%-20s:\n" "BEGIN PROGRAM" 
+printf "%s\n" "-------------------------------------------"
+printf "%-20s: %s\n" "Command Line" "${CL}"
+printf "%-20s: %s\n" "Time" "$ME_START"
+printf "%-20s: %s\n" "User" "$USER"
+printf "%-20s: %s\n" "Home Dir." "$HOME"
+printf "%-20s: %s\n" "Shell" "$SHELL"
+printf "%-20s: %s\n" "PWD" "$CWD"
+printf "%-20s: %s\n" "Host" `hostname -s | tr '[a-z]' '[A-Z]'`
+printf "%-20s: %s\n" "LANG" "$LANG"
+printf "%-20s: %s\n" "R Home" "$R_HOME"
+printf "%s\n" '------------------------------------'
+```
+
+## R Scripts
+
+```{r, echo=FALSE, include=TRUE, error=TRUE}
+
+# script = names(script_list)[1]
+for (script in names(script_list)){
+  x = names(script_list)[script_index]
+  
+  section_header <- paste0("### Script Number ", script_index, ": ", x)
+  cat (section_header, "\n")
+
+  script_index = script_index + 1
+  
+  result <- tryCatch({
+    source(x,
+           print.eval = TRUE)},
+    error = function(e) {
+      c("error", e)}
+  )
+  
+  if (result[1] == "error") {
+    error_count = error_count + 1
+    error_scripts = c(error_scripts, x)
+    stop(result[2])
+  } else {
+    success_count = success_count + 1
+    script_list[[x]] = "success"
+  }
+}
+
+```
+
+
+## Status
+
+```{r results='asis', echo = FALSE}
+script_df <- t(as.data.frame(script_list))
+names(script_df) <- c("script", "status")
+
+if (error_count > 0 | success_count == 0) {
+  cat("### ERRORS WERE FOUND", "\n")
+  mail_msg = paste0("<h3>The following script(s) reported an error:</h3> ",
+                    "<ul>",
+                    paste("<li>", error_scripts),
+                    "</ul>",
+                    "The ", app_name, " app may have corrupt data.",
+                    "<br><br>For more information, please view the full report at the following link:",
+                    "<br><a href=", report_link, ">",report_link, "</a>",
+                    "<br><br><hr>",
+                    "<small>Source: ", rmarkdown::metadata$title, "</small>"
+  )
+  mime_msg <- sendmailR::mime_part(mail_msg)
+  mime_msg[["headers"]][["Content-Type"]] <- "text/html"
+  
+  cat(paste0("Sending email message to ", mail_to), "\n")
+  
+  smtp_conversation <- sendmailR::sendmail(from = mail_from,
+                                           to = mail_to,
+                                           subj = mail_subj,
+                                           msg = mime_msg,
+                                           control = list(smtpServer = smtp_host, verbose = FALSE)
+  )
+} else {
+  cat("### NO ERRORS WERE FOUND")
+}
+```
+
+```{r}
+#| echo: FALSE
+
+knitr::kable(script_df)
+```
+
