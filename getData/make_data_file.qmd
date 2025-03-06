@@ -22,8 +22,8 @@ report_link <- "https://connect.spgenetics.com/scriptingTemplate_rpt"
 #- of the script execution.
 script_list <-list("make_data_file.R" = "failure", 
                    "run_something.R" = "failure")
+
 #- for keeping track of scripts and errors
-script_index = 1
 success_count = 0
 error_count = 0
 error_scripts = c()
@@ -84,14 +84,13 @@ printf "%s\n" '------------------------------------'
 ```{r, echo=FALSE, include=TRUE, error=TRUE, results='asis'}
 
 for (script in names(script_list)) {
-  x = names(script_list)[script_index]
   
   knitr::knit_child(
     text = c(
-      glue::glue("### Script: \"{x}\""),
+      glue::glue("### Script: \"{script}\""),
       '```{r, echo = F, results=\'markup\'}',
       'result <- tryCatch(
-         { source(x, print.eval = TRUE) },
+         { source(script, print.eval = TRUE) },
          error = function(e) { c("error", e) }
        )',
       '```'
@@ -100,17 +99,16 @@ for (script in names(script_list)) {
   ) |>
     cat(sep = '\n')
 
-  script_index = script_index + 1
   
   if (result[1] == "error") {
     error_count = error_count + 1
-    error_scripts = c(error_scripts, x)
+    error_scripts = c(error_scripts, script)
     knitr::knit_child(
       text = as.character(
         htmltools::tagList(
           htmltools::div(
             htmltools::p(
-              "**ERROR**:", 
+              "***ERROR***: ", 
               result[2], 
               style = "color:Crimson; background-color: SeaShell; padding-left: 7px;"
             ),
@@ -121,7 +119,7 @@ for (script in names(script_list)) {
       cat()
   } else {
     success_count = success_count + 1
-    script_list[[x]] = "success"
+    script_list[[script]] = "success"
   }
   
   cat("---", "\n")
