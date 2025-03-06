@@ -1,24 +1,20 @@
 ---
 title: "Automated Script Execution Report"
 format:
-  html:
+  email:
     toc: true
     toc_depth: 2
     toc-location: right
     anchor-sections: false
-  
-
-    
+email-preview: false
 engine: knitr
+resource_files:
+- run_something.R
+- make_data_file.R
 ---
 
 ```{r setup}
 #| echo: FALSE
-
-# Load required libraries: -
-library(blastula)
-library(glue)
-library(htmltools)
 
 reportName <- "Automated Script Execution Report"
 app_name   <- "Shiny Scripting Template"
@@ -39,11 +35,6 @@ success_count = 0
 error_count = 0
 error_scripts = c()
 
-#- mail parameters
-smtp_host = "shpsmtp.murphybrownllc.com"
-mail_to = "lgould@smithfield.com"
-mail_from = "shiny@spgenetics.com"
-mail_subj = paste0("Error: ", app_name, " Automated Script Report")
 
 #- Set up a hook so R errors are highlighted
 knitr::knit_hooks$set(error = function(x, options) { 
@@ -152,30 +143,11 @@ names(script_df) <- c("script", "status")
 if (error_count > 0 | success_count == 0) {
   statusSymbol <- fontawesome::fa("triangle-exclamation", fill = "#F4A71C", margin_right = '0.2em')
   statusMsg <- "ERRORS FOUND!"
-#   mail_msg = paste0("<h3>The following script(s) reported an error:</h3> ",
-#                     "<ul>",
-#                     paste("<li>", error_scripts),
-#                     "</ul>",
-#                     "The ", app_name, " app may have corrupt data.",
-#                     "<br><br>For more information, please view the full report at the following link:",
-#                     "<br><a href=", report_link, ">",report_link, "</a>",
-#                     "<br><br><hr>",
-#                     "<small>Source: ", rmarkdown::metadata$title, "</small>"
-#   )
-#   mime_msg <- sendmailR::mime_part(mail_msg)
-#   mime_msg[["headers"]][["Content-Type"]] <- "text/html"
-#   
-#   cat(paste0("Sending email message to ", mail_to), "\n")
-#   
-#   smtp_conversation <- sendmailR::sendmail(from = mail_from,
-#                                            to = mail_to,
-#                                            subj = mail_subj,
-#                                            msg = mime_msg,
-#                                            control = list(smtpServer = smtp_host, verbose = FALSE)
-#   )
+  sendEmail <- T
 } else {
   statusSymbol <- fontawesome::fa("circle-check", fill = "#63A945", prefer_type = "solid", margin_right = '0.2em')
   statusMsg <- "No errors found"
+  sendEmail <- F
 }
 ```
 
@@ -186,4 +158,42 @@ if (error_count > 0 | success_count == 0) {
 
 knitr::kable(script_df)
 ```
+
+
+<!-- Setup email to send on error -->
+
+::: {.email}
+
+::: {.email-scheduled}
+`{r} sendEmail`
+:::
+
+::: {.subject}
+ERROR: `{r} reportName`
+:::
+
+The "`r paste(app_name, reportName)`" encountered errors while running the following scripts:
+
+```{r, include = F, echo = F}
+
+errorList <- sapply(error_scripts, USE.NAMES = F, FUN = function(x){
+  htmltools::tags$li(x) |>
+    as.character()
+}) |>
+  c()
+
+```
+
+```{r, echo = F,  results='asis'}
+cat(errorList)
+htmltools::tags$br() |>
+  as.character() |>
+  cat("\n")
+```
+
+Visit the [hosted report]({{< env RSC_REPORT_URL >}})
+for full details.
+
+:::
+
 
