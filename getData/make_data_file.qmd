@@ -61,7 +61,6 @@ This report shows the results of running scripts for the [`r app_name`](`r conne
 
 In this section we want to show parameter information from the operating system
 
----
 
 ```{bash}
 #| label: shell_info
