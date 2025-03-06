@@ -83,14 +83,12 @@ printf "%s\n" '------------------------------------'
 
 ```{r, echo=FALSE, include=TRUE, error=TRUE, results='asis'}
 
-# script = names(script_list)[1]
-for (script in names(script_list)){
+for (script in names(script_list)) {
   x = names(script_list)[script_index]
   
   knitr::knit_child(
     text = c(
-      as.character(htmltools::hr()),
-      paste0("### Script Number ", script_index, ": ", x),
+      glue::glue("### Script: \"{x}\""),
       '```{r, echo = F, results=\'markup\'}',
       'result <- tryCatch(
          { source(x, print.eval = TRUE) },
@@ -125,6 +123,8 @@ for (script in names(script_list)){
     success_count = success_count + 1
     script_list[[x]] = "success"
   }
+  
+  cat("---", "\n")
 }
 
 ```
@@ -136,32 +136,32 @@ for (script in names(script_list)){
 script_df <- t(as.data.frame(script_list))
 names(script_df) <- c("script", "status")
 
-if (error_count > 0 | success_count == 0) {
-  cat("### ERRORS WERE FOUND", "\n")
-  mail_msg = paste0("<h3>The following script(s) reported an error:</h3> ",
-                    "<ul>",
-                    paste("<li>", error_scripts),
-                    "</ul>",
-                    "The ", app_name, " app may have corrupt data.",
-                    "<br><br>For more information, please view the full report at the following link:",
-                    "<br><a href=", report_link, ">",report_link, "</a>",
-                    "<br><br><hr>",
-                    "<small>Source: ", rmarkdown::metadata$title, "</small>"
-  )
-  mime_msg <- sendmailR::mime_part(mail_msg)
-  mime_msg[["headers"]][["Content-Type"]] <- "text/html"
-  
-  cat(paste0("Sending email message to ", mail_to), "\n")
-  
-  smtp_conversation <- sendmailR::sendmail(from = mail_from,
-                                           to = mail_to,
-                                           subj = mail_subj,
-                                           msg = mime_msg,
-                                           control = list(smtpServer = smtp_host, verbose = FALSE)
-  )
-} else {
-  cat("### NO ERRORS WERE FOUND")
-}
+# if (error_count > 0 | success_count == 0) {
+#   cat("### ERRORS WERE FOUND", "\n")
+#   mail_msg = paste0("<h3>The following script(s) reported an error:</h3> ",
+#                     "<ul>",
+#                     paste("<li>", error_scripts),
+#                     "</ul>",
+#                     "The ", app_name, " app may have corrupt data.",
+#                     "<br><br>For more information, please view the full report at the following link:",
+#                     "<br><a href=", report_link, ">",report_link, "</a>",
+#                     "<br><br><hr>",
+#                     "<small>Source: ", rmarkdown::metadata$title, "</small>"
+#   )
+#   mime_msg <- sendmailR::mime_part(mail_msg)
+#   mime_msg[["headers"]][["Content-Type"]] <- "text/html"
+#   
+#   cat(paste0("Sending email message to ", mail_to), "\n")
+#   
+#   smtp_conversation <- sendmailR::sendmail(from = mail_from,
+#                                            to = mail_to,
+#                                            subj = mail_subj,
+#                                            msg = mime_msg,
+#                                            control = list(smtpServer = smtp_host, verbose = FALSE)
+#   )
+# } else {
+#   cat("### NO ERRORS WERE FOUND")
+# }
 ```
 
 ```{r}
