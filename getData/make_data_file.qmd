@@ -6,6 +6,7 @@ format:
     toc_depth: 2
     toc-location: right
     anchor-sections: false
+    css: report.css
 email-preview: false
 engine: knitr
 resource_files:
@@ -50,15 +51,13 @@ subtitle: "[`r app_name`](`r connectURL`)"
 ---
 
 
-::: {.panel-tabset}
-
-### Header
+## Header
 
 This report shows the results of running scripts for the [`r app_name`](`r connectURL`) app. The header section describes the report
 
 
 
-### Environment Parameters
+## Environment Parameters
 
 In this section we want to show parameter information from the operating system
 
@@ -86,8 +85,6 @@ printf "%-20s: %s\n" "LANG" "$LANG"
 printf "%-20s: %s\n" "R Home" "$R_HOME"
 printf "%s\n" '------------------------------------'
 ```
-
-:::
 
 
 
@@ -159,6 +156,8 @@ if (error_count > 0 | success_count == 0) {
 ```
 
 ## `r statusSymbol` Status: _`r statusMsg`_ 
+
+
 
 ```{r}
 #| echo: FALSE
