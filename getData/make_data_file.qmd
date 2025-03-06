@@ -81,7 +81,7 @@ printf "%s\n" '------------------------------------'
 
 ## R Scripts
 
-```{r, echo=FALSE, include=TRUE, error=TRUE}
+```{r, echo=FALSE, include=TRUE, error=TRUE, results='asis'}
 
 # script = names(script_list)[1]
 for (script in names(script_list)){
