@@ -1,0 +1,18 @@
+/* Set font for entire report */
+* {
+  font-family: "Arial", "Helvetica", sans-serif;
+}
+
+/* Make sections stand out */
+h2 {
+  color: #3D4543;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 0px;
+  box-shadow: -2px 0 0 0 #fff, -9px 0 0 0 #007297,-13px 0 0 0 #fff,-50px 0 0px 0px #D15E14;
+  font-weight: 100;
+  font-size: 25px;
+}
+
+
+
