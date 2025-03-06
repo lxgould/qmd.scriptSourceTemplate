@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -27,42 +27,40 @@ ul.task-list li input[type="checkbox"] {
 <script src="make_data_file_files/libs/quarto-html/quarto.js"></script>
 <script src="make_data_file_files/libs/quarto-html/popper.min.js"></script>
 <script src="make_data_file_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="make_data_file_files/libs/quarto-html/anchor.min.js"></script>
 <link href="make_data_file_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="make_data_file_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="make_data_file_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="make_data_file_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="make_data_file_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="make_data_file_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="make_data_file_files/libs/bootstrap/bootstrap-5e054bed33e1ebacfce7f503e23dd65e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
 <body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
   <li><a href="#header" id="toc-header" class="nav-link active" data-scroll-target="#header">Header</a></li>
   <li><a href="#environment-parameters" id="toc-environment-parameters" class="nav-link" data-scroll-target="#environment-parameters">Environment Parameters</a></li>
-  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R Scripts</a></li>
-  <li><a href="#status" id="toc-status" class="nav-link" data-scroll-target="#status">Status</a>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R Scripts</a>
   <ul class="collapse">
-  <li><a href="#no-errors-were-found" id="toc-no-errors-were-found" class="nav-link" data-scroll-target="#no-errors-were-found">NO ERRORS WERE FOUND</a></li>
+  <li><a href="#script-make_data_file.r" id="toc-script-make_data_file.r" class="nav-link" data-scroll-target="#script-make_data_file.r">Script: “make_data_file.R”</a></li>
+  <li><a href="#script-run_something.r" id="toc-script-run_something.r" class="nav-link" data-scroll-target="#script-run_something.r">Script: “run_something.R”</a></li>
   </ul></li>
+  <li><a href="#status-no-errors-found" id="toc-status-no-errors-found" class="nav-link" data-scroll-target="#status-no-errors-found"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.2em;font-size:inherit;fill:#63A945;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Status: <em>No errors found</em></a></li>
   </ul>
 </nav>
-</div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Automated Script Execution Report</h1>
-<p class="subtitle lead">shiny.superCoolShinyApp</p>
+<p class="subtitle lead"><a href="https://connect.spgenetics.com/scriptingTemplate_app/">Shiny Scripting Template</a></p>
 </div>
 
 
@@ -79,12 +77,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<hr>
 <section id="header" class="level2">
-<h2 class="anchored" data-anchor-id="header">Header</h2>
-<p>This report shows the results of running scripts for the shiny.superCoolShinyApp app. The header section describes the report</p>
+<h2 data-anchor-id="header">Header</h2>
+<p>This report shows the results of running scripts for the <a href="https://connect.spgenetics.com/scriptingTemplate_app/">Shiny Scripting Template</a> app. The header section describes the report</p>
+<hr>
 </section>
 <section id="environment-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="environment-parameters">Environment Parameters</h2>
+<h2 data-anchor-id="environment-parameters">Environment Parameters</h2>
 <p>In this section we want to show parameter information from the operating system</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -92,29 +92,40 @@ ul.task-list li input[type="checkbox"] {
 BEGIN PROGRAM       :
 -------------------------------------------
 Command Line        : bash 
-Time                : 20250303_12:11:22
-User                : gould
-Home Dir.           : /Users/gould
-Shell               : /bin/zsh
-PWD                 : /Users/gould/SPG/tickets/3881/test_app_1/getData
-Host                : LGSPGMACBOOKPRO
-LANG                : en_US.UTF-8
-R Home              : /Library/Frameworks/R.framework/Resources
+Time                : 20250306_18:03:06
+User                : apitera
+Home Dir.           : /data/homes/apitera
+Shell               : /bin/bash
+PWD                 : /data/homes/apitera/shiny.scriptingTemplate/getData
+Host                : AZE2IPPOSITWB01
+LANG                : C.UTF-8
+R Home              : /opt/R/4.4.2/lib/R
 ------------------------------------</code></pre>
 </div>
 </div>
+<hr>
 </section>
 <section id="r-scripts" class="level2">
-<h2 class="anchored" data-anchor-id="r-scripts">R Scripts</h2>
+<h2 data-anchor-id="r-scripts">R Scripts</h2>
+<section id="script-make_data_file.r" class="level3">
+<h3 data-anchor-id="script-make_data_file.r">Script: “make_data_file.R”</h3>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'lubridate'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Script Number 1: make_data_file.R 
-Writing the date to ../data/test_app_1.txt</code></pre>
+<pre><code>Writing the date to /srv/shiny-server/shiny-data/scriptingTemplate/test_app_1.txt</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="make_data_file_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="make_data_file_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -123,17 +134,24 @@ Writing the date to ../data/test_app_1.txt</code></pre>
 
 Response: y
             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-x            1  34917   34917  3888.2 &lt; 2.2e-16 ***
-Residuals 9998  89785       9                      
+x            1  34186   34186  3767.5 &lt; 2.2e-16 ***
+Residuals 9998  90722       9                      
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-### Script Number 2: run_something.R 
-character(0)</code></pre>
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="script-run_something.r" class="level3">
+<h3 data-anchor-id="script-run_something.r">Script: “run_something.R”</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="make_data_file_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="make_data_file_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -142,20 +160,20 @@ character(0)</code></pre>
 
 Response: y
           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-x          1  527.7  527.70  48.382 3.967e-10 ***
-Residuals 98 1068.9   10.91                      
+x          1 209.61 209.610  22.232 8.007e-06 ***
+Residuals 98 923.98   9.428                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<hr>
 </section>
-<section id="status" class="level2">
-<h2 class="anchored" data-anchor-id="status">Status</h2>
-<section id="no-errors-were-found" class="level3">
-<h3 class="anchored" data-anchor-id="no-errors-were-found">NO ERRORS WERE FOUND</h3>
+</section>
+<section id="status-no-errors-found" class="level2">
+<h2 data-anchor-id="status-no-errors-found"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.2em;font-size:inherit;fill:#63A945;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Status: <em>No errors found</em></h2>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">make_data_file.R</td>
@@ -169,7 +187,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
-</section>
+<!-- Setup email to send on error -->
 </section>
 
 </main>
@@ -194,13 +212,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -209,18 +220,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -252,7 +252,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -260,7 +280,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -357,7 +377,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
