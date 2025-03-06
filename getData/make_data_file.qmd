@@ -20,8 +20,8 @@ library(blastula)
 library(glue)
 library(htmltools)
 
-
-app_name = "Shiny Scripting Template"
+reportName <- "Automated Script Execution Report"
+app_name   <- "Shiny Scripting Template"
 shinyExt   <- "scriptingTemplate_app/"
 connectURL <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
 
