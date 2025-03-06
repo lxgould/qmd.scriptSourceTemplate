@@ -87,17 +87,22 @@ printf "%s\n" '------------------------------------'
 for (script in names(script_list)){
   x = names(script_list)[script_index]
   
-  section_header <- paste0("### Script Number ", script_index, ": ", x)
-  cat (section_header, "\n")
+  knitr::knit_child(
+    text = c(
+      as.character(htmltools::hr()),
+      paste0("### Script Number ", script_index, ": ", x),
+      '```{r, echo = F, results=\'markup\'}',
+      'result <- tryCatch(
+         { source(x, print.eval = TRUE) },
+         error = function(e) { c("error", e) }
+       )',
+      '```'
+    ), 
+    quiet = T, envir = environment()
+  ) |>
+    cat(sep = '\n')
 
   script_index = script_index + 1
-  
-  result <- tryCatch({
-    source(x,
-           print.eval = TRUE)},
-    error = function(e) {
-      c("error", e)}
-  )
   
   if (result[1] == "error") {
     error_count = error_count + 1
