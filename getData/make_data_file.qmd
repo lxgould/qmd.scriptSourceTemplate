@@ -128,14 +128,13 @@ for (script in names(script_list)) {
 ```
 
 
-## Status
-
 ```{r results='asis', echo = FALSE}
 script_df <- t(as.data.frame(script_list))
 names(script_df) <- c("script", "status")
 
-# if (error_count > 0 | success_count == 0) {
-#   cat("### ERRORS WERE FOUND", "\n")
+if (error_count > 0 | success_count == 0) {
+  statusSymbol <- fontawesome::fa("triangle-exclamation", fill = "#F4A71C", margin_right = '0.2em')
+  statusMsg <- "ERRORS FOUND!"
 #   mail_msg = paste0("<h3>The following script(s) reported an error:</h3> ",
 #                     "<ul>",
 #                     paste("<li>", error_scripts),
@@ -157,10 +156,13 @@ names(script_df) <- c("script", "status")
 #                                            msg = mime_msg,
 #                                            control = list(smtpServer = smtp_host, verbose = FALSE)
 #   )
-# } else {
-#   cat("### NO ERRORS WERE FOUND")
-# }
+} else {
+  statusSymbol <- fontawesome::fa("circle-check", fill = "#63A945", prefer_type = "solid", margin_right = '0.2em')
+  statusMsg <- "No errors found"
+}
 ```
+
+## `r statusSymbol` Status: _`r statusMsg`_ 
 
 ```{r}
 #| echo: FALSE
