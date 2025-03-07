@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automated Script Execution Report</title>
+<title>Daily Script Report: App name here</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,6 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="make_data_file_files/libs/bootstrap/bootstrap-5e054bed33e1ebacfce7f503e23dd65e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="report.css">
 </head>
 
 <body>
@@ -44,14 +45,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#header" id="toc-header" class="nav-link active" data-scroll-target="#header">Header</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a>
+  <ul class="collapse">
+  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
   <li><a href="#environment-parameters" id="toc-environment-parameters" class="nav-link" data-scroll-target="#environment-parameters">Environment Parameters</a></li>
+  </ul></li>
   <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R Scripts</a>
   <ul class="collapse">
   <li><a href="#script-make_data_file.r" id="toc-script-make_data_file.r" class="nav-link" data-scroll-target="#script-make_data_file.r">Script: “make_data_file.R”</a></li>
   <li><a href="#script-run_something.r" id="toc-script-run_something.r" class="nav-link" data-scroll-target="#script-run_something.r">Script: “run_something.R”</a></li>
   </ul></li>
-  <li><a href="#status-no-errors-found" id="toc-status-no-errors-found" class="nav-link" data-scroll-target="#status-no-errors-found"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.2em;font-size:inherit;fill:#63A945;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Status: <em>No errors found</em></a></li>
+  <li><a href="#status-errors-found" id="toc-status-errors-found" class="nav-link" data-scroll-target="#status-errors-found"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.2em;font-size:inherit;fill:#F4A71C;overflow:visible;position:relative;"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg> Status: <em>ERRORS FOUND!</em></a></li>
   </ul>
 </nav>
 </div>
@@ -59,8 +63,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Automated Script Execution Report</h1>
-<p class="subtitle lead"><a href="https://connect.spgenetics.com/scriptingTemplate_app/">Shiny Scripting Template</a></p>
+<h1 class="title">Daily Script Report: App name here</h1>
+<p class="subtitle lead">Automated Script Execution Report</p>
 </div>
 
 
@@ -77,22 +81,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<hr>
-<section id="header" class="level2">
-<h2 data-anchor-id="header">Header</h2>
-<p>This report shows the results of running scripts for the <a href="https://connect.spgenetics.com/scriptingTemplate_app/">Shiny Scripting Template</a> app. The header section describes the report</p>
-<hr>
+<section id="about" class="level2">
+<h2 data-anchor-id="about">About</h2>
+<p>This report shows the results of running scripts for the <a href="https://connect.spgenetics.com/scriptingTemplate_app/">Shiny Scripting Template</a> app.<br>
+Code available on GitHub <a href="https://github.com/SPG-Data-Systems/"><svg aria-hidden="true" role="img" viewbox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></p>
+<section id="schedule" class="level3">
+<h3 data-anchor-id="schedule">Schedule</h3>
+<p>These scripts are run every day at 0700 Eastern.</p>
 </section>
-<section id="environment-parameters" class="level2">
-<h2 data-anchor-id="environment-parameters">Environment Parameters</h2>
-<p>In this section we want to show parameter information from the operating system</p>
+<section id="environment-parameters" class="level3">
+<h3 data-anchor-id="environment-parameters">Environment Parameters</h3>
+<p>This section shows parameter information from the operating system during the last script execution.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 BEGIN PROGRAM       :
 -------------------------------------------
 Command Line        : bash 
-Time                : 20250306_18:03:06
+Time                : 20250307_17:46:59
 User                : apitera
 Home Dir.           : /data/homes/apitera
 Shell               : /bin/bash
@@ -104,6 +110,7 @@ R Home              : /opt/R/4.4.2/lib/R
 </div>
 </div>
 <hr>
+</section>
 </section>
 <section id="r-scripts" class="level2">
 <h2 data-anchor-id="r-scripts">R Scripts</h2>
@@ -122,23 +129,11 @@ Attaching package: 'lubridate'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Writing the date to /srv/shiny-server/shiny-data/scriptingTemplate/test_app_1.txt</code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="make_data_file_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: y
-            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-x            1  34186   34186  3767.5 &lt; 2.2e-16 ***
-Residuals 9998  90722       9                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
+<div class="errMsg">
+<p>
+<strong><em>ERROR!</em></strong> I forced an error. The date was not written to the file
+</p>
 </div>
 <hr>
 </section>
@@ -151,7 +146,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="make_data_file_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="make_data_file_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -160,8 +155,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Response: y
           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-x          1 209.61 209.610  22.232 8.007e-06 ***
-Residuals 98 923.98   9.428                      
+x          1 379.45  379.45  41.648 4.185e-09 ***
+Residuals 98 892.88    9.11                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -169,15 +164,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <hr>
 </section>
 </section>
-<section id="status-no-errors-found" class="level2">
-<h2 data-anchor-id="status-no-errors-found"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.2em;font-size:inherit;fill:#63A945;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg> Status: <em>No errors found</em></h2>
+<section id="status-errors-found" class="level2">
+<h2 data-anchor-id="status-errors-found"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.2em;font-size:inherit;fill:#F4A71C;overflow:visible;position:relative;"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg> Status: <em>ERRORS FOUND!</em></h2>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">make_data_file.R</td>
-<td style="text-align: left;">success</td>
+<td style="text-align: left;">failure</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">run_something.R</td>
