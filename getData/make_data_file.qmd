@@ -17,18 +17,29 @@ resource_files:
 ```{r setup}
 #| echo: FALSE
 
-app_name   <- "Shiny Scripting Template"
-shinyExt   <- "scriptingTemplate_app/"
+# Shiny app name & Connect URL extension
+app_name <- "Shiny Scripting Template"
+shinyExt <- "scriptingTemplate_app/"
 
+#- Day of week & time when scripts are run (use "day" for daily-run scripts)
 scriptDay  <- "day"
 scriptTime <- "0700"
-connectURL <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
+
+#- Relative paths: for: `scriptDir` = scripts to be run; 
+#-                      `dataDir` = output data directory relative to shiny-data/
+
+# scriptDir <- "R/getData/" # most apps have scripts in this directory
+scriptDir <- ""
+dataDir   <- "fakeDir"
 
 #- List the scripts here that need to be run. 
 runScripts <- c("make_data_file.R", "run_something.R")
 
-
 #- ========== NOTHING BELOW THIS LINE NEEDS TO BE EDITED ==================
+
+#- Make full Shiny App URL & absolute data directory path
+connectURL   <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
+shinyDataDir <- glue::glue("/srv/shiny-server/shiny-data/{dataDir}")
 
 #- Set script status default to "failure" and changes depending on the outcome
 #- of the script execution.
@@ -108,7 +119,7 @@ for (script in names(script_list)) {
       glue::glue("### Script: \"{script}\""),
       '```{r, echo = F, results=\'markup\'}',
       'result <- tryCatch(
-         { source(script, print.eval = TRUE) },
+         { source(paste0(scriptDir, script), print.eval = TRUE) },
          error = function(e) { c("error", e) }
        )',
       '```'
