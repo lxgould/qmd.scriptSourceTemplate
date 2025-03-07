@@ -19,6 +19,9 @@ resource_files:
 
 app_name   <- "Shiny Scripting Template"
 shinyExt   <- "scriptingTemplate_app/"
+
+scriptDay  <- "day"
+scriptTime <- "0700"
 connectURL <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
 
 #- List the scripts here that need to be run. 
@@ -55,13 +58,15 @@ subtitle: "[`r app_name`](`r connectURL`)"
 
 ## Header
 
-This report shows the results of running scripts for the [`r app_name`](`r connectURL`) app. The header section describes the report
+This report shows the results of running scripts for the [`r app_name`](`r connectURL`) app. The header section describes the report.
 
-
+## Schedule
+These scripts are run every `r scriptDay` at `r scriptTime` Eastern.  
 
 ## Environment Parameters
 
-In this section we want to show parameter information from the operating system
+This section shows parameter information from the operating system during the 
+last script execution.
 
 
 ```{bash}
