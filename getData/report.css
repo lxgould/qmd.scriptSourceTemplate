@@ -73,3 +73,14 @@ div.errMsg > p {
   color: #DC143D; 
 }
 
+/* Format table of contents */
+nav[role=doc-toc]>h2, .sidebar nav[role=doc-toc]>ul li a {
+  color: #3D4543;
+}
+
+.sidebar nav[role=doc-toc] ul>li>a.active, .sidebar nav[role=doc-toc] ul>li>ul>li>a.active {
+    border-left: none;
+    color: #007297 !important;
+    box-shadow: -1.8px 0 0 0 #007297,-3px 0 0 0 #fff,-10px 0 0 0 #D15E14;
+    font-weight: bold;
+}
