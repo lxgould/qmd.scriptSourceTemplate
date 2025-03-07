@@ -111,19 +111,16 @@ for (script in names(script_list)) {
   if (result[1] == "error") {
     error_count = error_count + 1
     error_scripts = c(error_scripts, script)
+
     knitr::knit_child(
+      quiet = T,
       text = as.character(
-        htmltools::tagList(
-          htmltools::div(
-            htmltools::p(
-              "***ERROR***: ", 
-              result[2], 
-              style = "color:Crimson; background-color: SeaShell; padding-left: 7px;"
-            ),
-            style = "border-left: 5px solid Crimson; margin: 20px 0px;"
-          )
+        htmltools::div( 
+          class = "errMsg",
+          htmltools::p( "***ERROR!*** ", result[2] )
         )
-      ), quiet = T) |>
+      )
+    ) |>
       cat()
   } else {
     success_count = success_count + 1
