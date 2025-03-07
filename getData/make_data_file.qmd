@@ -35,6 +35,9 @@ dataDir   <- "fakeDir"
 #- List the scripts here that need to be run. 
 runScripts <- c("make_data_file.R", "run_something.R")
 
+#- GitHub repo URL:
+ghURL <- glue::glue("https://github.com/SPG-Data-Systems/{repo}", repo = "")
+
 #- ========== NOTHING BELOW THIS LINE NEEDS TO BE EDITED ==================
 
 #- Make full Shiny App URL & absolute data directory path
@@ -67,15 +70,15 @@ subtitle: "[`r app_name`](`r connectURL`)"
 ---
 
 
-## Header
+## About
 
-This report shows the results of running scripts for the [`r app_name`](`r connectURL`) app. The header section describes the report.
+This report shows the results of running scripts for the [`r app_name`](`r connectURL`) app.  
+Code available on GitHub [`r fontawesome::fa("github")`](`r ghURL`)
 
-## Schedule
+### Schedule
 These scripts are run every `r scriptDay` at `r scriptTime` Eastern.  
 
-## Environment Parameters
-
+### Environment Parameters
 This section shows parameter information from the operating system during the 
 last script execution.
 
