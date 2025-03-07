@@ -4,15 +4,59 @@
 }
 
 /* Make sections stand out */
-h2 {
+h1 {
   color: #3D4543;
   background-color: #fff;
   padding: 10px;
   margin-bottom: 0px;
   box-shadow: -2px 0 0 0 #fff, -9px 0 0 0 #007297,-13px 0 0 0 #fff,-50px 0 0px 0px #D15E14;
   font-weight: 100;
+}
+
+
+h2 {
+  color: #007297;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 0px;
+  font-weight: bold;
   font-size: 25px;
 }
 
 
+h3 {
+  font-weight: 600;
+  padding: 0 10px;
+  font-size: 20px;
+  color: #D15E14;
+}
+
+p {
+  padding: 5px 10px;
+}
+
+
+a {
+  color: #4097CB;
+  opacity: 100;
+}
+
+hr {
+  color: #D9D8D6;
+  opacity: 100;
+}
+
+
+/* Custom faux "error message" -- useful when tracking errors & printing out 
+messages that you disguise as errors */
+
+div.errMsg {
+  color: #DC143D; 
+  background-color: #FFF5EE;
+}
+
+div.errMsg > p {
+  border-left: 5px solid #DC143D;
+  margin: 20px 0px;
+}
 
