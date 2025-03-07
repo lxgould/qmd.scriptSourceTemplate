@@ -1,5 +1,5 @@
 ---
-title: "Automated Script Execution Report"
+title: "Daily Script Report: App name here"
 format:
   email:
     toc: true
@@ -38,6 +38,7 @@ runScripts <- c("make_data_file.R", "run_something.R")
 #- GitHub repo URL:
 ghURL <- glue::glue("https://github.com/SPG-Data-Systems/{repo}", repo = "")
 
+
 #- ========== NOTHING BELOW THIS LINE NEEDS TO BE EDITED ==================
 
 #- Make full Shiny App URL & absolute data directory path
@@ -66,7 +67,7 @@ knitr::knit_hooks$set(error = function(x, options) {
 ```
 
 ---
-subtitle: "[`r app_name`](`r connectURL`)"
+subtitle: "Automated Script Execution Report"
 ---
 
 
