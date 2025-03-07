@@ -21,12 +21,17 @@ app_name   <- "Shiny Scripting Template"
 shinyExt   <- "scriptingTemplate_app/"
 connectURL <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
 
+#- List the scripts here that need to be run. 
+runScripts <- c("make_data_file.R", "run_something.R")
 
-#- List the scripts here that need to be run. "script_name = "status".
-#- status default to "failure" and changes depending on the outcome
+
+#- ========== NOTHING BELOW THIS LINE NEEDS TO BE EDITED ==================
+
+#- Set script status default to "failure" and changes depending on the outcome
 #- of the script execution.
-script_list <-list("make_data_file.R" = "failure", 
-                   "run_something.R" = "failure")
+script_list <- rep("failure", length(runScripts)) |>
+  as.list() |> 
+  stats::setNames(runScripts)
 
 #- for keeping track of scripts and errors
 success_count = 0
