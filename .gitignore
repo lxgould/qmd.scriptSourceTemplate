@@ -6,3 +6,9 @@
 .quarto
 
 **/*_files/*
+
+# ignore json created for report emails
+.output_metadata.json
+
+# random "figure" directory...?
+*/figure/*

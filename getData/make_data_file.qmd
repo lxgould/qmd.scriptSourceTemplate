@@ -1,34 +1,61 @@
 ---
-title: "Automated Script Execution Report"
+title: "Daily Script Report: App name here"
 format:
-  html:
+  email:
     toc: true
-    toc_depth: 4
-    toc-location: left
+    toc_depth: 2
+    toc-location: right
+    anchor-sections: false
+    css: report.css
+email-preview: false
 engine: knitr
+resource_files:
+- run_something.R
+- make_data_file.R
 ---
 
 ```{r setup}
 #| echo: FALSE
-app_name = "shiny.scriptingTemplate"
-report_link <- "https://connect.spgenetics.com/scriptingTemplate_rpt"
 
-#- List the scripts here that need to be run. "script_name = "status".
-#- status default to "failure" and changes depending on the outcome
+# Shiny app name & Connect URL extension
+app_name <- "Shiny Scripting Template"
+shinyExt <- "scriptingTemplate_app/"
+
+#- Day of week & time when scripts are run (use "day" for daily-run scripts)
+scriptDay  <- "day"
+scriptTime <- "0700"
+
+#- Relative paths: for: `scriptDir` = scripts to be run; 
+#-                      `dataDir` = output data directory relative to shiny-data/
+
+# scriptDir <- "R/getData/" # most apps have scripts in this directory
+scriptDir <- ""
+dataDir   <- "fakeDir"
+
+#- List the scripts here that need to be run. 
+runScripts <- c("make_data_file.R", "run_something.R")
+
+#- GitHub repo URL:
+ghURL <- glue::glue("https://github.com/SPG-Data-Systems/{repo}", repo = "")
+
+
+#- ========== NOTHING BELOW THIS LINE NEEDS TO BE EDITED ==================
+
+#- Make full Shiny App URL & absolute data directory path
+connectURL   <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
+shinyDataDir <- glue::glue("/srv/shiny-server/shiny-data/{dataDir}")
+
+#- Set script status default to "failure" and changes depending on the outcome
 #- of the script execution.
-script_list <-list("make_data_file.R" = "failure", 
-                   "run_something.R" = "failure")
+script_list <- rep("failure", length(runScripts)) |>
+  as.list() |> 
+  stats::setNames(runScripts)
+
 #- for keeping track of scripts and errors
-script_index = 1
 success_count = 0
 error_count = 0
 error_scripts = c()
 
-#- mail parameters
-smtp_host = "shpsmtp.murphybrownllc.com"
-mail_to = "lgould@smithfield.com"
-mail_from = "shiny@spgenetics.com"
-mail_subj = paste0("Error: ", app_name, " Automated Script Report")
 
 #- Set up a hook so R errors are highlighted
 knitr::knit_hooks$set(error = function(x, options) { 
@@ -40,16 +67,21 @@ knitr::knit_hooks$set(error = function(x, options) {
 ```
 
 ---
-subtitle: "`r app_name`"
+subtitle: "Automated Script Execution Report"
 ---
 
-## Header
 
-This report shows the results of running scripts for the `r app_name` app. The header section describes the report
+## About
 
-## Environment Parameters
+This report shows the results of running scripts for the [`r app_name`](`r connectURL`) app.  
+Code available on GitHub [`r fontawesome::fa("github")`](`r ghURL`)
 
-In this section we want to show parameter information from the operating system
+### Schedule
+These scripts are run every `r scriptDay` at `r scriptTime` Eastern.  
+
+### Environment Parameters
+This section shows parameter information from the operating system during the 
+last script execution.
 
 
 ```{bash}
@@ -75,76 +107,117 @@ printf "%-20s: %s\n" "R Home" "$R_HOME"
 printf "%s\n" '------------------------------------'
 ```
 
+
+
+
+---
+
 ## R Scripts
 
-```{r, echo=FALSE, include=TRUE, error=TRUE}
+```{r, echo=FALSE, include=TRUE, error=TRUE, results='asis'}
 
-# script = names(script_list)[1]
-for (script in names(script_list)){
-  x = names(script_list)[script_index]
+for (script in names(script_list)) {
   
-  section_header <- paste0("### Script Number ", script_index, ": ", x)
-  cat (section_header, "\n")
+  knitr::knit_child(
+    text = c(
+      glue::glue("### Script: \"{script}\""),
+      '```{r, echo = F, results=\'markup\'}',
+      'result <- tryCatch(
+         { source(paste0(scriptDir, script), print.eval = TRUE) },
+         error = function(e) { c("error", e) }
+       )',
+      '```'
+    ), 
+    quiet = T, envir = environment()
+  ) |>
+    cat(sep = '\n')
 
-  script_index = script_index + 1
-  
-  result <- tryCatch({
-    source(x,
-           print.eval = TRUE)},
-    error = function(e) {
-      c("error", e)}
-  )
   
   if (result[1] == "error") {
     error_count = error_count + 1
-    error_scripts = c(error_scripts, x)
-    stop(result[2])
+    error_scripts = c(error_scripts, script)
+
+    knitr::knit_child(
+      quiet = T,
+      text = as.character(
+        htmltools::div( 
+          class = "errMsg",
+          htmltools::p( "***ERROR!*** ", result[2] )
+        )
+      )
+    ) |>
+      cat()
   } else {
     success_count = success_count + 1
-    script_list[[x]] = "success"
+    script_list[[script]] = "success"
   }
+  
+  cat("---", "\n")
 }
 
 ```
 
-
-## Status
 
 ```{r results='asis', echo = FALSE}
 script_df <- t(as.data.frame(script_list))
 names(script_df) <- c("script", "status")
 
 if (error_count > 0 | success_count == 0) {
-  cat("### ERRORS WERE FOUND", "\n")
-  mail_msg = paste0("<h3>The following script(s) reported an error:</h3> ",
-                    "<ul>",
-                    paste("<li>", error_scripts),
-                    "</ul>",
-                    "The ", app_name, " app may have corrupt data.",
-                    "<br><br>For more information, please view the full report at the following link:",
-                    "<br><a href=", report_link, ">",report_link, "</a>",
-                    "<br><br><hr>",
-                    "<small>Source: ", rmarkdown::metadata$title, "</small>"
-  )
-  mime_msg <- sendmailR::mime_part(mail_msg)
-  mime_msg[["headers"]][["Content-Type"]] <- "text/html"
-  
-  cat(paste0("Sending email message to ", mail_to), "\n")
-  
-  smtp_conversation <- sendmailR::sendmail(from = mail_from,
-                                           to = mail_to,
-                                           subj = mail_subj,
-                                           msg = mime_msg,
-                                           control = list(smtpServer = smtp_host, verbose = FALSE)
-  )
+  statusSymbol <- fontawesome::fa("triangle-exclamation", fill = "#F4A71C", margin_right = '0.2em')
+  statusMsg <- "ERRORS FOUND!"
+  sendEmail <- T
 } else {
-  cat("### NO ERRORS WERE FOUND")
+  statusSymbol <- fontawesome::fa("circle-check", fill = "#63A945", prefer_type = "solid", margin_right = '0.2em')
+  statusMsg <- "No errors found"
+  sendEmail <- F
 }
 ```
+
+## `r statusSymbol` Status: _`r statusMsg`_ 
+
+
 
 ```{r}
 #| echo: FALSE
 
 knitr::kable(script_df)
 ```
+
+
+<!-- Setup email to send on error -->
+
+::: {.email}
+
+::: {.email-scheduled}
+`{r} sendEmail`
+:::
+
+::: {.subject}
+ERROR: {{< meta title >}}
+:::
+
+The "`r app_name`" {{< meta title >}} encountered errors while running the following scripts:
+
+```{r, include = F, echo = F}
+
+errorList <- sapply(error_scripts, USE.NAMES = F, FUN = function(x){
+  htmltools::tags$li(x) |>
+    as.character()
+}) |>
+  c()
+
+```
+
+```{r, echo = F,  results='asis'}
+cat(errorList)
+htmltools::tags$br() |>
+  as.character() |>
+  cat("\n")
+```
+
+Visit the [hosted report]({{< env RSC_REPORT_URL >}})
+for full details.
+
+:::
+
 
