@@ -17,13 +17,10 @@ resource_files:
 ```{r setup}
 #| echo: FALSE
 
-reportName <- "Automated Script Execution Report"
 app_name   <- "Shiny Scripting Template"
 shinyExt   <- "scriptingTemplate_app/"
 connectURL <- glue::glue("https://connect.spgenetics.com/{shinyExt}")
 
-
-report_link <- "https://connect.spgenetics.com/scriptingTemplate_rpt"
 
 #- List the scripts here that need to be run. "script_name = "status".
 #- status default to "failure" and changes depending on the outcome
@@ -174,10 +171,10 @@ knitr::kable(script_df)
 :::
 
 ::: {.subject}
-ERROR: `{r} reportName`
+ERROR: {{< meta title >}}
 :::
 
-The "`r paste(app_name, reportName)`" encountered errors while running the following scripts:
+The "`r app_name`" {{< meta title >}} encountered errors while running the following scripts:
 
 ```{r, include = F, echo = F}
 
